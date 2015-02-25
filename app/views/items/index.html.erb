@@ -2,20 +2,22 @@
 
 <p><%= link_to 'New item', new_item_path %></p>
 
-<br>
-
+<% img_fetcher = ImageFetcher.new %>
 <% @items.each do |item| %>
-  <h3><%= item.item_type.name %>: <%= item.title %></h3>
-
-  <p><%if item.completed? == true %></p>
-    <p>This item has been completed on <%= item.completed_on%></p>
-  <%end%>
-  <p>
-    <%= link_to 'Edit', edit_item_path(item) %>
-    *
-    <%= link_to 'Delete', item_path(item), method: :delete %>
-  </p>
-
-  <br>
-  <br>
+<p>
+<%= item.title %><br>
+<%=item.item_type.name%><br>
+<%if item.image_url != nil%>
+<img src="<%=img_fetcher.fetch(item.image_url)%>" alt="Image here" width="300" height="300"><br>
+<%end%>
+<% if item.completed? %>
+Complete
+<% else %>
+Incomplete
+<% end %><br>
+<p>
+<%= link_to 'Edit', edit_item_path(item) %>
+<%= link_to 'Delete', item_path(item), method: :delete %>
+</p>
+</p>
 <% end %>

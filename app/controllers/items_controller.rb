@@ -10,6 +10,7 @@ def index
   def create
     @item = Item.new(item_params)
     if @item.save
+	  #@image_url = ImageFetcher.new.fetch(@item.title)
       redirect_to items_path
     else
       render :new
@@ -24,6 +25,7 @@ def index
     @item = Item.find(params[:id])
 
     if @item.update_attributes(item_params)
+	  #@image_url = ImageFetcher.new.fetch(@item.title)
       redirect_to items_path
     else
       render :edit
@@ -39,6 +41,6 @@ def index
   private
 
   def item_params
-    params.require(:item).permit(:title, :completed_on, :item_type_id)
+    params.require(:item).permit(:title, :completed_on, :item_type_id, :image_url)
   end
 end
