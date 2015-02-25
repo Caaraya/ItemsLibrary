@@ -1,0 +1,21 @@
+<h1>List of Items </h1>
+
+<p><%= link_to 'New item', new_entry_path %></p>
+
+<br>
+
+<% @items.each do |item| %>
+  <h3><%= item.item_type.name %>: <%= item.title %></h3>
+
+  <p><%if item.completed? == true %></p>
+  <p>This item has been completed on <%= item.completed_on%></p>
+
+  <p>
+    <%= link_to 'Edit', edit_item_path(entry) %>
+    *
+    <%= link_to 'Delete', item_path(entry), method: :delete %>
+  </p>
+
+  <br>
+  <br>
+<% end %>
